@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monad Architecture Game - Command Flow</title>
+    <style>
+        /* CSS for a dark, clean look */
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; background-color: #1e1e1e; color: #fff; }
+        .container { background-color: #2d2d2d; padding: 30px; border-radius: 10px; width: 90%; max-width: 700px; }
+        h1 { color: #87ceeb; }
+        .stats, .actions { margin-bottom: 20px; padding: 15px; border: 1px solid #555; border-radius: 5px; }
+        .actions button { padding: 12px 25px; margin: 5px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; transition: background-color 0.2s; }
+        .actions button:hover:not(:disabled) { background-color: #0056b3; }
+        .actions button:disabled { background-color: #555; cursor: not-allowed; }
+        .log-box { margin-top: 20px; padding: 15px; background-color: #3c3c3c; border-radius: 5px; height: 200px; overflow-y: scroll; border: 1px solid #555; }
+        .step-success { color: #4caf50; }
+        .step-failure { color: #f44336; font-weight: bold; }
+        .step-info { color: #87ceeb; }
+        #healthDisplay { font-size: 24px; font-weight: bold; color: #f44336; }
+        .game-over-text { color: yellow; font-size: 1.2em; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monad Command Flow Game</h1>
+        <p>This demonstrates how the **Monad Bind operation** manages the flow. Your goal is to keep your Health > 0. If any command makes Health $\le 0$, the Monad chain **breaks** (Game Over!).</p>
+
+        <div class="stats">
+            Current State: Health = <span id="healthDisplay">100</span>
+            <div id="gameOverMessage" class="game-over-text" style="display: none;">GAME OVER! The Monad Chain has failed.</div>
+            <button onclick="resetGame()">Reset Game</button>
+        </div>
+
+        <h2>Executor Commands (Monad Steps):</h2>
+        <div class="actions">
+            <button id="btnHeal" onclick="executeCommand('Heal')">1. Heal (+15)</button>
+            <button id="btnMinor" onclick="executeCommand('Minor_Attack')">2. Minor Attack (-20)</button>
+            <button id="btnMajor" onclick="executeCommand('Major_Attack')">3. Major Attack (-50)</button>
+            <button id="btnCritical" onclick="executeCommand('Critical_Attack')">4. Critical Attack (-101)</button>
+        </div>
+
+        <h2>Monad Execution Log (Driver $\leftrightarrow$ Executor Flow):</h2>
+        <div id="log" class="log-box"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
